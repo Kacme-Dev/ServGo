@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         exigirLogin: function (opcoes) {
             if (this.estaLogado()) return true;
             opcoes = opcoes || {};
-            var loginUrl = '/paginasSite/login.html';
+            var loginUrl = sgUrl('/paginasSite/login.html');
             if (opcoes.redirectDepoisLogin) {
                 loginUrl += '?redirect=' + encodeURIComponent(opcoes.redirectDepoisLogin);
             }
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
      * @returns {string} HTML do corpo do e-mail
      */
     function sgNewsletterGerarCorpoEmail(noticia, emailDestino) {
-        var baseUrl = window.location.origin;
+        var baseUrl = window.location.origin + (window.SG_BASE || '');
         var unsubUrl = baseUrl + '/index.html?unsubscribe=' + encodeURIComponent(emailDestino);
         var imgHtml = noticia.imagemUrl
             ? '<img src="' + noticia.imagemUrl + '" alt="Imagem da matéria" style="width:100%;max-height:220px;object-fit:cover;border-radius:6px;margin-bottom:16px;">'
@@ -1502,16 +1502,15 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdown.id = 'prest-perfil-dropdown';
             dropdown.style.cssText = 'display:none; position:absolute; top:calc(100% + 4px); left:50%; transform:translateX(-50%); min-width:230px; background:var(--fundo-card,#fff); border:1.5px solid var(--borda,#dee2e6); border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,.13); z-index:1055; padding:6px 0;';
 
-            var base = '/paginasPrestador/';
             var links = [
-                { href: base + 'prestadorAreaExclusiva.html', icon: 'bi-house-door', text: 'Área Exclusiva' },
-                { href: base + 'prestadorServicosAgendados.html', icon: 'bi-calendar-check', text: 'Meus Agendamentos' },
-                { href: base + 'prestadorConfigurarAgenda.html', icon: 'bi-calendar3', text: 'Gerenciar Agenda' },
-                { href: base + 'prestadorHotsiteAdm.html', icon: 'bi-globe', text: 'Meu Hot Site' },
-                { href: base + 'prestadorAvaliacoesFeitas.html', icon: 'bi-star', text: 'Avaliações Feitas' },
-                { href: base + 'prestadorAvaliacoesRecebidas.html', icon: 'bi-star-half', text: 'Avaliações Recebidas' },
-                { href: base + 'dashboardPrestador.html', icon: 'bi-grid-1x2', text: 'Dashboard' },
-                { href: base + 'prestadorContato.html', icon: 'bi-chat-text', text: 'Suporte/Contato' }
+                { href: sgUrl('/paginasPrestador/prestadorAreaExclusiva.html'), icon: 'bi-house-door', text: 'Área Exclusiva' },
+                { href: sgUrl('/paginasPrestador/prestadorServicosAgendados.html'), icon: 'bi-calendar-check', text: 'Meus Agendamentos' },
+                { href: sgUrl('/paginasPrestador/prestadorConfigurarAgenda.html'), icon: 'bi-calendar3', text: 'Gerenciar Agenda' },
+                { href: sgUrl('/paginasPrestador/prestadorHotsiteAdm.html'), icon: 'bi-globe', text: 'Meu Hot Site' },
+                { href: sgUrl('/paginasPrestador/prestadorAvaliacoesFeitas.html'), icon: 'bi-star', text: 'Avaliações Feitas' },
+                { href: sgUrl('/paginasPrestador/prestadorAvaliacoesRecebidas.html'), icon: 'bi-star-half', text: 'Avaliações Recebidas' },
+                { href: sgUrl('/paginasPrestador/dashboardPrestador.html'), icon: 'bi-grid-1x2', text: 'Dashboard' },
+                { href: sgUrl('/paginasPrestador/prestadorContato.html'), icon: 'bi-chat-text', text: 'Suporte/Contato' }
             ];
 
             links.forEach(function (item) {
@@ -5939,7 +5938,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function _modalLoginNecessario() {
-        var loginUrl = '/paginasSite/login.html';
+        var loginUrl = sgUrl('/paginasSite/login.html');
         var id = 'modalLoginNec'; var ex = document.getElementById(id); if (ex) ex.remove();
         var modal = document.createElement('div'); modal.className = 'modal fade'; modal.id = id; modal.setAttribute('tabindex', '-1');
         modal.innerHTML = '<div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header" style="background:#FFC300;color:#000;"><h5 class="modal-title"><i class="bi bi-lock me-2"></i>Acesso Restrito</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>Para continuar, você precisa estar logado.</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button><a href="' + loginUrl + '" class="btn btn-warning"><i class="bi bi-box-arrow-in-right me-1"></i>Fazer Login</a></div></div></div>';
@@ -6074,7 +6073,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Monta URL com tipo e email do prestador (se disponíveis a partir dos params da página)
                 var tipoParam  = dados ? (dados.categoria || '') : '';
                 var prestParam = emailPrest || '';
-                var baseUrl = '/paginasCliente/clienteAgendarServicos.html';
+                var baseUrl = sgUrl('/paginasCliente/clienteAgendarServicos.html');
                 var query   = [];
                 if (tipoParam)  query.push('tipo='  + encodeURIComponent(tipoParam));
                 if (prestParam) query.push('prestador=' + encodeURIComponent(prestParam));
@@ -6087,7 +6086,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Sprint 2 — persiste o email do prestador para redirecionamento pós-login/cadastro
         if (emailPrest) sessionStorage.setItem('servgo_pending_prestador', emailPrest);
 
-        var loginUrl = '/paginasSite/login.html?redirect=clienteAgendar';
+        var loginUrl = sgUrl('/paginasSite/login.html') + '?redirect=clienteAgendar';
         var id = 'modalLoginHotsite'; var ex = document.getElementById(id); if (ex) ex.remove();
         var modal = document.createElement('div'); modal.className = 'modal fade'; modal.id = id; modal.setAttribute('tabindex', '-1');
         modal.innerHTML = '<div class="modal-dialog modal-dialog-centered"><div class="modal-content">' +
@@ -6434,14 +6433,13 @@ document.addEventListener('DOMContentLoaded', function () {
         dropdown.id = 'cli-perfil-dropdown';
         dropdown.style.cssText = 'display:none; position:absolute; top:calc(100% + 4px); right:0; min-width:230px; background:var(--fundo-card,#fff); border:1.5px solid var(--borda,#dee2e6); border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,.13); z-index:1055; padding:6px 0;';
 
-        var base = '/paginasCliente/';
         var links = [
-            { href: base + 'clienteAreaExclusiva.html', icon: 'bi-house-door', text: 'Área Exclusiva' },
-            { href: base + 'clientePerfilAdm.html', icon: 'bi-person-circle', text: 'Meu Perfil' },
-            { href: base + 'clienteAgendarServicos.html', icon: 'bi-calendar-check', text: 'Agendar Serviços' },
-            { href: base + 'clienteAvaliacoesFeitas.html', icon: 'bi-star', text: 'Avaliações Realizadas' },
-            { href: base + 'clienteAvaliacoesRecebidas.html', icon: 'bi-star-half', text: 'Avaliações Recebidas' },
-            { href: base + 'clienteContatoSite.html', icon: 'bi-chat-text', text: 'Suporte/Contato' }
+            { href: sgUrl('/paginasCliente/clienteAreaExclusiva.html'), icon: 'bi-house-door', text: 'Área Exclusiva' },
+            { href: sgUrl('/paginasCliente/clientePerfilAdm.html'), icon: 'bi-person-circle', text: 'Meu Perfil' },
+            { href: sgUrl('/paginasCliente/clienteAgendarServicos.html'), icon: 'bi-calendar-check', text: 'Agendar Serviços' },
+            { href: sgUrl('/paginasCliente/clienteAvaliacoesFeitas.html'), icon: 'bi-star', text: 'Avaliações Realizadas' },
+            { href: sgUrl('/paginasCliente/clienteAvaliacoesRecebidas.html'), icon: 'bi-star-half', text: 'Avaliações Recebidas' },
+            { href: sgUrl('/paginasCliente/clienteContatoSite.html'), icon: 'bi-chat-text', text: 'Suporte/Contato' }
         ];
         links.forEach(function (item) {
             var a = document.createElement('a');
@@ -7480,7 +7478,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Marca a notificação de evento como lida e navega para a tela correta
                     sgMarcarNotifLidaPorId(email, conv.notifId);
                     if (tipo === 'prest') {
-                        var url = '/paginasPrestador/prestadorServicosAgendados.html?aba=pendentes';
+                        var url = sgUrl('/paginasPrestador/prestadorServicosAgendados.html') + '?aba=pendentes';
                         if (conv.agId) url += '&agId=' + encodeURIComponent(conv.agId);
                         window.location.href = url;
                     } else {
@@ -7996,7 +7994,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // preservando o parâmetro ?tipo= da URL caso exista.
                 var params = new URLSearchParams(window.location.search);
                 var tipoParam = params.get('tipo') || '';
-                var urlRedir  = '/paginasCliente/clienteAgendarServicos.html';
+                var urlRedir  = sgUrl('/paginasCliente/clienteAgendarServicos.html');
                 if (tipoParam) urlRedir += '?tipo=' + encodeURIComponent(tipoParam);
                 window.location.replace(urlRedir);
                 return; // interrompe — o redirect irá ocorrer
@@ -8267,7 +8265,7 @@ document.addEventListener('DOMContentLoaded', function () {
             function _irHotsite(e) {
                 if (e) e.stopPropagation();
                 window.location.href =
-                    '/paginasPrestador/prestadorHotsite.html?email=' +
+                    sgUrl('/paginasPrestador/prestadorHotsite.html') + '?email=' +
                     encodeURIComponent(prest.email);
             }
             btnS.addEventListener('click', _irHotsite);
@@ -10208,7 +10206,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var usu = obterUsuarioLogado();
         if (!usu || usu.tipo !== 'admin') {
-            SG_Auth.guardPagina(['admin'], '/paginasSite/adminLogin.html');
+            SG_Auth.guardPagina(['admin'], sgUrl('/paginasSite/adminLogin.html'));
             return;
         }
 
