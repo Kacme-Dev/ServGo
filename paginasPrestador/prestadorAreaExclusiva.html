@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServGo! - Área do Prestador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/estiloServGo.css">
+</head>
+
+<body>
+
+     <header>
+
+            <!--TOPO DA PÁGINA-->
+
+        <!--Trabalha sobre os Menus (links) — estrutura idêntica ao index.html-->
+
+        <nav class="navbar navbar-expand-lg">
+
+            <div class="container menu"> <!--Altera o conteúdo dos Menus (links)-->
+
+                <!--Logo — clicar volta para a página do prestador-->
+                <a class="navbar-brand" href="indexPrestador.html">
+                    <span class="serv-part">Serv</span><span class="go-part">Go!</span>
+                </a>
+
+                <!--Botão Sanduíche — visível apenas em mobile, expande os itens do menu como dropdown-->
+                <div class="d-flex order-lg-3">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrestador"
+                        aria-controls="navbarPrestador" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+                <!--Área colapsável da navbar:
+                    - Desktop: exibe apenas o dropdown "Meu Perfil" à direita
+                    - Mobile: ao clicar no sanduíche, exibe os itens da sidebar como dropdown -->
+                <div class="collapse navbar-collapse" id="navbarPrestador">
+
+                    <!--Itens da sidebar — visíveis somente no collapse mobile (d-lg-none)-->
+                    <ul class="navbar-nav mx-auto d-lg-none">
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="prestadorAreaExclusiva.html"><i class="bi bi-house-door me-2"></i>Área Exclusiva</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="prestadorServicosAgendados.html"><i class="bi bi-calendar-check me-2"></i>Meus Agendamentos</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="prestadorConfigurarAgenda.html"><i class="bi bi-calendar3 me-2"></i>Gerenciar Agenda</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="prestadorHotsiteAdm.html"><i class="bi bi-globe me-2"></i>Meu Hot Site</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="prestadorAvaliacoesFeitas.html"><i class="bi bi-star me-2"></i>Avaliações Feitas</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="prestadorAvaliacoesRecebidas.html"><i class="bi bi-star-half me-2"></i>Avaliações Recebidas</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="dashboardPrestador.html"><i class="bi bi-grid-1x2 me-2"></i>Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="prestadorContato.html"><i class="bi bi-chat-text me-2"></i>Suporte/Contato</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" href="prestadorMeuPlano.html"><i class="bi bi-star-half me-2"></i>Plano Contratado</a></li>
+                        <li class="nav-item border-top mt-2 pt-2"><a class="nav-link fw-bold" href="../index.html" style="color: rgb(220, 53, 69);"><i class="bi bi-box-arrow-right me-2"></i>Sair</a></li>
+                    </ul>
+
+                    <!--Dropdown "Meu Perfil" — alinhado à direita, visível em desktop e no collapse mobile-->
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <span class="navbar-logada-info" style="position: relative; display: inline-flex; flex-direction: column; align-items: center; cursor: default;">
+
+                                <a id="prest-perfil-toggle" href="#" style="font-size: 0.72rem; color: var(--azul-principal,#146ADB); text-decoration: underline; cursor: pointer; white-space: nowrap;">
+                                    <i class="bi bi-chevron-down" id="prest-chevron" style="font-size:.65rem;"></i> Meu Perfil
+                                </a>
+
+                                <!-- Dropdown Menu -->
+                                <div id="prest-perfil-dropdown" style="display: none; position: absolute; top: calc(100% + 4px); right: 0; min-width: 230px; background: var(--fundo-card,#fff); border: 1.5px solid var(--borda,#dee2e6); border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.13) 0px 4px 18px; z-index: 1055; padding: 6px 0px;">
+                                    <a href="prestadorAreaExclusiva.html" style="display: block; padding: 7px 16px; color: var(--texto-principal,#212529); text-decoration: none; font-size: 0.88rem;">
+                                        <i class="bi bi-house-door me-2" style="color:#146ADB;"></i>Área Exclusiva
+                                    </a>
+                                    <a href="prestadorServicosAgendados.html" style="display: block; padding: 7px 16px; color: var(--texto-principal,#212529); text-decoration: none; font-size: 0.88rem;">
+                                        <i class="bi bi-calendar-check me-2" style="color:#146ADB;"></i>Meus Agendamentos
+                                    </a>
+                                    <a href="prestadorConfigurarAgenda.html" style="display: block; padding: 7px 16px; color: var(--texto-principal,#212529); text-decoration: none; font-size: 0.88rem;">
+                                        <i class="bi bi-calendar3 me-2" style="color:#146ADB;"></i>Gerenciar Agenda
+                                    </a>
+                                    <a href="prestadorHotsiteAdm.html" style="display: block; padding: 7px 16px; color: var(--texto-principal,#212529); text-decoration: none; font-size: 0.88rem;">
+                                        <i class="bi bi-globe me-2" style="color:#146ADB;"></i>Meu Hot Site
+                                    </a>
+                                    <a href="prestadorAvaliacoesFeitas.html" style="display: block; padding: 7px 16px; color: var(--texto-principal,#212529); text-decoration: none; font-size: 0.88rem;">
+                                        <i class="bi bi-star me-2" style="color:#146ADB;"></i>Avaliações Feitas
+                                    </a>
+                                    <a href="prestadorAvaliacoesRecebidas.html" style="display: block; padding: 7px 16px; color: var(--texto-principal,#212529); text-decoration: none; font-size: 0.88rem;">
+                                        <i class="bi bi-star-half me-2" style="color:#146ADB;"></i>Avaliações Recebidas
+                                    </a>
+                                    <a href="dashboardPrestador.html" style="display: block; padding: 7px 16px; color: var(--texto-principal,#212529); text-decoration: none; font-size: 0.88rem;">
+                                        <i class="bi bi-grid-1x2 me-2" style="color:#146ADB;"></i>Dashboard
+                                    </a>
+                                    <a href="prestadorContato.html" style="display: block; padding: 7px 16px; color: var(--texto-principal,#212529); text-decoration: none; font-size: 0.88rem;">
+                                        <i class="bi bi-chat-text me-2" style="color:#146ADB;"></i>Suporte/Contato
+                                    </a>
+                                    <div style="border-top: 1px solid var(--borda,#dee2e6); margin: 6px 0px;"></div>
+                                    <a href="../index.html" style="display: block; padding: 7px 16px; color: rgb(220, 53, 69); text-decoration: none; font-size: 0.88rem; font-weight: 600;">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Sair
+                                    </a>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </nav>
+        </header>
+        <!--FIM DO CABEÇALHO DA PÁGINA-->
+
+    <!-- WRAPPER SIDEBAR + CONTEÚDO -->
+    <div class="prest-wrapper">
+
+                <nav class="prest-sidebar">
+            <ul>
+                <li><a class="prest-nav-ativo" href="prestadorAreaExclusiva.html"><i class="bi bi-house-door"></i> Área Exclusiva</a></li>
+                <li><a href="prestadorServicosAgendados.html"><i class="bi bi-calendar-check"></i> Meus Agendamentos</a></li>
+                <li><a href="prestadorConfigurarAgenda.html"><i class="bi bi-calendar3"></i> Gerenciar Agenda</a></li>
+                <li><a href="prestadorHotsiteAdm.html"><i class="bi bi-globe"></i> Meu Hot Site</a></li>
+                <li><a href="prestadorAvaliacoesFeitas.html"><i class="bi bi-star"></i> Avaliações Feitas</a></li>
+                <li><a href="prestadorAvaliacoesRecebidas.html"><i class="bi bi-star-half"></i> Avaliações Recebidas</a></li>
+                <li><a href="dashboardPrestador.html"><i class="bi bi-grid-1x2"></i> Dashboard</a></li>
+                <li><a href="prestadorContato.html"><i class="bi bi-chat-text"></i> Suporte/Contato</a></li>
+                <li><a href="prestadorMeuPlano.html"><i class="bi bi-star-half"></i> Plano Contratado</a></li>
+                <li class="sidebar-sair"><a href="../index.html" id="sidebar-btn-sair"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+            </ul>
+        </nav>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="prest-main">
+            <h1 class="prest-page-titulo">Área do Prestador</h1>
+
+            <!-- CARDS DE ESTATÍSTICAS -->
+            <div class="prest-stat-grid">
+                <div class="prest-stat-card destaque-amarelo">
+                    <div class="prest-stat-titulo">Próximo Agendamento</div>
+                    <div class="prest-stat-valor" style="font-size:1.1rem;" id="prest-proximo-titulo">Nenhum agendamento</div>
+                    <div class="prest-stat-info amarelo" id="prest-proximo-cliente" style="display:none;">
+                        <i class="bi bi-person-fill"></i> <span id="prest-proximo-cliente-nome">—</span>
+                    </div>
+                    <div class="prest-stat-info amarelo" id="prest-proximo-telefone-linha" style="display:none;">
+                        <i class="bi bi-telephone-fill"></i> <span id="prest-proximo-telefone">—</span>
+                    </div>
+                    <div class="prest-stat-info amarelo">
+                        <i class="bi bi-clock"></i> <span id="prest-proximo-horario">—</span>
+                    </div>
+                    <div class="prest-stat-info amarelo" id="prest-proximo-endereco-linha" style="display:none;">
+                        <i class="bi bi-geo-alt-fill"></i> <span id="prest-proximo-endereco">—</span>
+                    </div>
+                    <div class="prest-stat-info amarelo" id="prest-proximo-valor-linha" style="display:none;">
+                        <i class="bi bi-cash-coin"></i> <span id="prest-proximo-valor">—</span>
+                        &nbsp;·&nbsp; <i class="bi bi-credit-card"></i> <span id="prest-proximo-pagamento">—</span>
+                    </div>
+                </div>
+                <div class="prest-stat-card destaque-azul">
+                    <div class="prest-stat-titulo">Avaliações Recebidas</div>
+                    <div class="prest-stat-valor" id="prest-aval-media"><span style="font-size:1rem; color:var(--texto-muted);">—</span></div>
+                    <div id="prest-aval-estrelas" style="font-size:1.2rem; margin: 2px 0 4px 0; color:#ffc107;"></div>
+                    <div class="prest-stat-info azul" id="prest-aval-info">
+                        <i class="bi bi-star-fill"></i> <span id="prest-aval-qtd">0 avaliação(ões)</span>
+                    </div>
+                </div>
+                <div class="prest-stat-card destaque-amarelo">
+                    <div class="prest-stat-titulo">Agendamentos na Fila</div>
+                    <div class="prest-stat-valor" id="prest-qtd-msgs-nao-lidas">0</div>
+                    <div class="prest-stat-info amarelo">
+                        <i class="bi bi-info-circle"></i> <span id="prest-fila-confirmados" style="font-size:0.82rem;"></span>
+                    </div>
+                    <div class="prest-stat-info amarelo" style="margin-top:4px;">
+                        <i class="bi bi-calendar-check"></i>
+                        <a href="prestadorServicosAgendados.html" id="link-ir-agendamentos"
+                           style="color:inherit; text-decoration:underline; cursor:pointer; font-size:0.88rem; font-weight:600; margin-left:4px;">
+                            Ir para agendamentos
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HISTÓRICO -->
+            <div class="prest-card">
+                <div class="prest-card-cabecalho">Seu Histórico</div>
+                <ul class="prest-historico-lista" id="prest-historico-lista">
+                    <li class="prest-historico-item" data-pedido-id="prest-pedido-1" data-cliente="Maria da Silva" data-servico="Troca de Válvula">
+                        <span class="prest-badge concluido">Concluído</span>
+                        <div class="prest-historico-acoes">
+                            <button type="button" class="btn btn-primary btn-prest-avaliar">Avaliar</button>
+                            <button type="button" class="btn btn-warning btn-prest-editar">Editar</button>
+                            <button type="button" class="btn btn-danger btn-prest-excluir">Excluir</button>
+                        </div>
+                    </li>
+                    <li class="prest-historico-item" data-pedido-id="prest-pedido-2" data-cliente="Pedro Souza" data-servico="Revisão Elétrica">
+                        <span><strong>Serviço:</strong> Revisão Elétrica &nbsp;|&nbsp; <strong>Cliente:</strong> Pedro Souza</span>
+                        <span class="prest-badge pendente">Pendente</span>
+                        <div class="prest-historico-acoes">
+                            <button type="button" class="btn btn-primary btn-prest-avaliar">Avaliar</button>
+                            <button type="button" class="btn btn-warning btn-prest-editar">Editar</button>
+                            <button type="button" class="btn btn-danger btn-prest-excluir">Excluir</button>
+                        </div>
+                    </li>
+                    <li class="prest-historico-item" data-pedido-id="prest-pedido-3" data-cliente="Ana Lúcia" data-servico="Limpeza Completa">
+                        <span><strong>Serviço:</strong> Limpeza Completa &nbsp;|&nbsp; <strong>Cliente:</strong> Ana Lúcia</span>
+                        <span class="prest-badge cancelado">Cancelado</span>
+                        <div class="prest-historico-acoes">
+                            <button type="button" class="btn btn-primary btn-prest-avaliar">Avaliar</button>
+                            <button type="button" class="btn btn-warning btn-prest-editar">Editar</button>
+                            <button type="button" class="btn btn-danger btn-prest-excluir">Excluir</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- MODAL: AVALIAR CLIENTE -->
+            <div class="modal fade" id="modalPrestAvaliar" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#FFC300; color:#000;">
+                            <h5 class="modal-title"><i class="bi bi-star me-2"></i>Avaliar Serviço</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="modal-prest-avaliar-info" class="mb-3 p-2 bg-light rounded text-dark"></div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark">Nota:</label>
+                                <div class="modal-estrelas" id="modal-prest-estrelas">
+                                    <i class="bi bi-star" data-nota="1"></i>
+                                    <i class="bi bi-star" data-nota="2"></i>
+                                    <i class="bi bi-star" data-nota="3"></i>
+                                    <i class="bi bi-star" data-nota="4"></i>
+                                    <i class="bi bi-star" data-nota="5"></i>
+                                </div>
+                                <input type="hidden" id="modal-prest-nota-valor" value="0">
+                            </div>
+                            <div class="mb-3">
+                                <label for="modal-prest-comentario" class="form-label fw-bold text-dark">Comentário:</label>
+                                <textarea class="form-control" id="modal-prest-comentario" rows="4" maxlength="1000" style="resize:none;" placeholder="Comentário sobre o serviço/cliente..."></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-warning" id="btn-prest-salvar-avaliacao"><i class="bi bi-floppy me-1"></i>Salvar Avaliação</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL: EDITAR AVALIAÇÃO -->
+            <div class="modal fade" id="modalPrestEditar" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#FFC300; color:#000;">
+                            <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Editar Avaliação</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="modal-prest-editar-info" class="mb-3 p-2 bg-light rounded text-dark"></div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark">Nota:</label>
+                                <div class="modal-estrelas" id="modal-prest-editar-estrelas">
+                                    <i class="bi bi-star" data-nota="1"></i>
+                                    <i class="bi bi-star" data-nota="2"></i>
+                                    <i class="bi bi-star" data-nota="3"></i>
+                                    <i class="bi bi-star" data-nota="4"></i>
+                                    <i class="bi bi-star" data-nota="5"></i>
+                                </div>
+                                <input type="hidden" id="modal-prest-editar-nota-valor" value="0">
+                            </div>
+                            <div class="mb-3">
+                                <label for="modal-prest-editar-comentario" class="form-label fw-bold text-dark">Comentário:</label>
+                                <textarea class="form-control" id="modal-prest-editar-comentario" rows="4" maxlength="1000" style="resize:none;"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-warning" id="btn-prest-salvar-edicao"><i class="bi bi-floppy me-1"></i>Salvar Alterações</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container" style="padding-top: 40px; padding-bottom: 32px;">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <a class="navbar-footer" href="#">
+                        <span class="serv-part-footer">Serv</span><span class="go-part-footer">Go!</span>
+                    </a>
+                    <p class="small text-muted mt-2">Análise, inovação e conteúdo de valor.</p>
+                    <div class="d-flex social-icons-custom mt-2">
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold mb-3 border-bottom border-warning pb-2 text-white">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Quem Somos</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Serviços</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Blog</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Fale Conosco</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold mb-3 border-bottom border-warning pb-2 text-white">Nossos Serviços</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Exemplo</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Exemplo</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Exemplo</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Exemplo</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-uppercase fw-bold mb-3 border-bottom border-warning pb-2 text-white">Contato</h5>
+                    <p class="small text-white-50"><i class="bi bi-geo-alt-fill me-2"></i> Rua Exemplo, 123 - Cidade, SP</p>
+                    <p class="small text-white-50"><i class="bi bi-telephone-fill me-2"></i> (18) 91234-5678</p>
+                    <p class="small text-white-50"><i class="bi bi-envelope-fill me-2"></i> contato@site.com.br</p>
+                    <a href="#" class="small text-decoration-none text-warning">Trabalhe Conosco</a>
+                </div>
+            </div>
+            <hr class="text-white-50">
+            <div class="text-center small text-white-50">
+                © 2025 ServGo! Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================== -->
+    <!--  MODAL: CHAT COM CLIENTE (do Dashboard do Prestador) -->
+    <!-- ============================================== -->
+    <!--
+        Este modal espelha o modal de chat de prestadorServicosAgendados.html.
+        É aberto pelo card "Mensagens Não Lidas" no dashboard do prestador.
+        A lógica é idêntica: mesma chave de localStorage, mesmo fluxo bidirecional.
+    -->
+    <div class="modal fade" id="modalChatClientePrestDash" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content agenda-chat-modal">
+                <div class="modal-header" style="background-color:#146ADB; color:#fff;">
+                    <h5 class="modal-title">
+                        <i class="bi bi-chat-dots me-2"></i>
+                        <span>Chat com </span><span id="prest-dash-chat-cliente-nome">Cliente</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="prest-dash-chat-info" class="agenda-chat-info"></div>
+                    <div id="prest-dash-chat-historico" class="agenda-chat-historico" aria-live="polite">
+                        <!-- preenchido via JS -->
+                    </div>
+                    <div class="agenda-chat-composer">
+                        <textarea id="prest-dash-chat-texto"
+                                  class="form-control agenda-chat-textarea"
+                                  rows="3"
+                                  placeholder="Escreva sua mensagem para o cliente..."
+                                  maxlength="1000"></textarea>
+                        <div class="agenda-chat-contador">
+                            <span id="prest-dash-chat-contador">0</span> / 1000 caracteres
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer agenda-chat-rodape">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="prest-dash-btn-limpar">
+                        <i class="bi bi-eraser me-1"></i> Limpar
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-sm" id="prest-dash-btn-editar">
+                        <i class="bi bi-pencil me-1"></i> Editar
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="prest-dash-btn-cancelar">
+                        <i class="bi bi-x-circle me-1"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" id="prest-dash-btn-enviar">
+                        <i class="bi bi-send me-1"></i> Enviar Mensagem
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1080;">
+        <div id="toastNotificacao" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <span id="toast-mensagem">Ação realizada com sucesso!</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/sg-base-path.js"></script>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

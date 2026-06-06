@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServGo! — Cadastro Administrativo</title>
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/estiloServGo.css">
+</head>
+<body>
+
+<div class="adm-cad-page">
+    <div class="adm-cad-card">
+
+        <!-- Logo -->
+        <div class="adm-cad-logo">
+            <span class="serv-part">Serv</span><span class="go-part">Go!</span>
+        </div>
+        <div class="text-center mb-3">
+            <span class="adm-cad-badge">
+                <i class="bi bi-shield-fill-plus"></i>
+                Cadastro Administrativo
+            </span>
+        </div>
+
+        <!-- Alerta dinâmico -->
+        <div id="adm-cad-alerta" style="display:none;"></div>
+
+        <!-- Aviso de restrição (substituído pelo JS conforme o modo) -->
+        <div class="adm-cad-aviso-acesso" id="adm-cad-aviso">
+            <i class="bi bi-shield-exclamation"></i>
+            <div>
+                <strong style="color:#e9d5ff;">Área restrita.</strong>
+                <br>O cadastro de administradores exige autorização prévia:
+                uma <strong>sessão admin ativa</strong> ou um
+                <strong>token de configuração</strong> do sistema.
+            </div>
+        </div>
+
+        <!-- Formulário de cadastro -->
+        <form id="form-admin-cadastro" autocomplete="off" novalidate>
+
+            <!-- Campo token (visível somente no modo setup) -->
+            <div class="mb-3" id="adm-cad-token-wrap" style="display:none;">
+                <div class="adm-cad-token-bloco">
+                    <i class="bi bi-key-fill me-1"></i>
+                    <strong>Nenhum admin encontrado.</strong>
+                    Informe o <strong>Token de Configuração</strong> para criar o primeiro administrador.
+                </div>
+                <label class="adm-field-label" for="adm-cad-token">
+                    <i class="bi bi-key"></i> Token de Configuração
+                </label>
+                <input type="password" class="adm-input" id="adm-cad-token"
+                       placeholder="Token fornecido pela equipe técnica"
+                       autocomplete="off">
+                <small style="color:rgba(255,255,255,.35);font-size:.72rem;">
+                    Token padrão de instalação: consulte a documentação técnica do sistema.
+                </small>
+            </div>
+
+            <div class="mb-3">
+                <label class="adm-field-label" for="adm-cad-nome">
+                    <i class="bi bi-person-fill"></i> Nome Completo
+                </label>
+                <input type="text" class="adm-input" id="adm-cad-nome"
+                       placeholder="Nome do administrador" maxlength="100"
+                       autocomplete="off">
+            </div>
+
+            <div class="mb-3">
+                <label class="adm-field-label" for="adm-cad-email">
+                    <i class="bi bi-envelope-fill"></i> E-mail
+                </label>
+                <input type="email" class="adm-input" id="adm-cad-email"
+                       placeholder="admin@servgo.com.br"
+                       autocomplete="off" spellcheck="false">
+            </div>
+
+            <div class="mb-3">
+                <label class="adm-field-label" for="adm-cad-senha">
+                    <i class="bi bi-lock-fill"></i> Senha
+                </label>
+                <div class="adm-input-wrap">
+                    <input type="password" class="adm-input" id="adm-cad-senha"
+                           placeholder="Mínimo 8 caracteres"
+                           style="padding-right:42px;"
+                           autocomplete="new-password">
+                    <button type="button" class="adm-toggle-senha" id="toggle-senha-1" tabindex="-1">
+                        <i class="bi bi-eye" id="ico-senha-1"></i>
+                    </button>
+                </div>
+                <!-- Indicador de força -->
+                <div class="adm-senha-strength" id="adm-strength-wrap" style="display:none;">
+                    <div class="adm-strength-bars">
+                        <div class="adm-strength-bar" id="sb1"></div>
+                        <div class="adm-strength-bar" id="sb2"></div>
+                        <div class="adm-strength-bar" id="sb3"></div>
+                        <div class="adm-strength-bar" id="sb4"></div>
+                    </div>
+                    <div class="adm-strength-label" id="adm-strength-label"></div>
+                </div>
+                <!-- Requisitos -->
+                <ul class="adm-req-lista" id="adm-req-lista">
+                    <li id="req-len"><i class="bi bi-circle"></i> Mínimo 8 caracteres</li>
+                    <li id="req-upp"><i class="bi bi-circle"></i> Letra maiúscula</li>
+                    <li id="req-num"><i class="bi bi-circle"></i> Número</li>
+                    <li id="req-esp"><i class="bi bi-circle"></i> Caractere especial (!@#$...)</li>
+                </ul>
+            </div>
+
+            <div class="mb-4">
+                <label class="adm-field-label" for="adm-cad-senha2">
+                    <i class="bi bi-lock-fill"></i> Confirmar Senha
+                </label>
+                <div class="adm-input-wrap">
+                    <input type="password" class="adm-input" id="adm-cad-senha2"
+                           placeholder="Repita a senha"
+                           style="padding-right:42px;"
+                           autocomplete="new-password">
+                    <button type="button" class="adm-toggle-senha" id="toggle-senha-2" tabindex="-1">
+                        <i class="bi bi-eye" id="ico-senha-2"></i>
+                    </button>
+                </div>
+                <small id="adm-match-msg" style="font-size:.72rem;display:none;"></small>
+            </div>
+
+            <button type="submit" class="adm-btn-cad" id="adm-btn-cadastrar">
+                <i class="bi bi-shield-fill-plus"></i>
+                Criar Conta Administrativa
+            </button>
+
+        </form>
+
+        <div class="adm-link-login">
+            <i class="bi bi-arrow-left me-1"></i>
+            Já tem conta?
+            <a href="adminLogin.html">Acessar o painel</a>
+        </div>
+
+        <div class="adm-back-link">
+            <a href="../index.html">
+                <i class="bi bi-arrow-left me-1"></i>Voltar ao site
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/sg-base-path.js"></script>
+<script src="../js/script.js" defer></script>
+</body>
+</html>

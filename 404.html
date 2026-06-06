@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServGo! — Redirecionando...</title>
+    <!--
+        GitHub Pages 404 Handler para ServGo!
+        ======================================
+        O GitHub Pages não tem servidor de rotas.
+        Este arquivo captura qualquer 404 e redireciona
+        para o index.html preservando o path desejado.
+
+        Baseado na técnica de: https://github.com/rafgraph/spa-github-pages
+    -->
+    <script>
+        // Detecta o prefixo do repo no GitHub Pages
+        var l = window.location;
+        var segmentos = l.pathname.split('/');
+        // O primeiro segmento após / é o nome do repo no GitHub Pages
+        // Ex: /servgo/paginasSite/login.html → base = /servgo
+        var base = '';
+        if (l.hostname.includes('github.io') && segmentos.length > 1 && segmentos[1]) {
+            base = '/' + segmentos[1];
+        }
+        // Redireciona para index.html com o path na query string
+        // O index.html vai redirecionar de volta para a URL correta
+        l.replace(
+            base + '/index.html?redirect=' +
+            encodeURIComponent(l.pathname.slice(base.length) + l.search) +
+            (l.hash ? '&hash=' + encodeURIComponent(l.hash) : '')
+        );
+    </script>
+    <noscript>
+        <meta http-equiv="refresh" content="2; url=./index.html">
+        <p>Redirecionando... <a href="./index.html">clique aqui se não for redirecionado</a></p>
+    </noscript>
+</head>
+<body>
+    <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Arial,sans-serif;background:#f2f4f8;">
+        <div style="text-align:center;padding:40px;">
+            <div style="font-size:2rem;font-weight:800;margin-bottom:8px;">
+                <span style="color:#146ADB;">Serv</span><span style="color:#FFC300;">Go!</span>
+            </div>
+            <p style="color:#666;">Redirecionando...</p>
+        </div>
+    </div>
+</body>
+</html>
